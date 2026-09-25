@@ -164,6 +164,11 @@
   .lineTotal{font-size:12.5px;color:var(--ink-soft);font-variant-numeric:tabular-nums;}
 
   .empty{padding:40px 0;text-align:center;color:var(--ink-soft);font-size:14px;}
+  .credit{
+    margin:28px 0 6px;text-align:center;color:var(--ink-soft);
+    font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:13px;letter-spacing:.02em;
+  }
+  .credit::before,.credit::after{content:"";display:inline-block;width:28px;height:1px;background:var(--line);vertical-align:middle;margin:0 10px;}
 
   /* ---- modal ---- */
   .overlay{
@@ -336,6 +341,7 @@
 
   <div class="cards" id="cards"></div>
   <div class="empty" id="empty" style="display:none">Под фильтр ничего не подошло.</div>
+  <footer class="credit">Сделал Чукин Владимир</footer>
 </div>
 
 <div class="overlay" id="overlay">
