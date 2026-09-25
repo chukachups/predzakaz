@@ -263,6 +263,8 @@
   }
   .lightbox.open{display:flex;}
   .lightbox img{max-width:100%;max-height:100%;border-radius:8px;box-shadow:0 10px 50px rgba(0,0,0,.6);}
+  /* Лёгкая защита фото: без меню «Сохранить» на iPhone и перетаскивания. */
+  .thumb img, .cartThumb, .lightbox img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;-webkit-user-drag:none;}
 
   /* ---- широкий экран: веточки чая по краям ---- */
   .deco{display:none;}
@@ -716,6 +718,10 @@ document.getElementById('catSel').onchange = e => { fCat = e.target.value; build
 document.getElementById('close').onclick = () => document.getElementById('overlay').classList.remove('open');
 document.getElementById('overlay').onclick = e => { if(e.target.id==='overlay') e.currentTarget.classList.remove('open'); };
 document.getElementById('lightbox').onclick = e => e.currentTarget.classList.remove('open');
+// Лёгкая защита фото лотов: без «Сохранить изображение» по правой кнопке и без перетаскивания.
+// Полностью от копирования это не спасает — только от случайного.
+document.addEventListener('contextmenu', e => { if(e.target.tagName === 'IMG') e.preventDefault(); });
+document.addEventListener('dragstart', e => { if(e.target.tagName === 'IMG') e.preventDefault(); });
 document.getElementById('cartBtn').onclick = () => { renderCart(); document.getElementById('cartOverlay').classList.add('open'); };
 document.getElementById('cartClose').onclick = () => document.getElementById('cartOverlay').classList.remove('open');
 document.getElementById('cartOverlay').onclick = e => { if(e.target.id==='cartOverlay') e.currentTarget.classList.remove('open'); };
