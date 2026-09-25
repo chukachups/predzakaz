@@ -494,7 +494,14 @@ function render(){
     const cb = document.createElement('input');
     cb.type='checkbox'; cb.checked=st.on;
     cb.setAttribute('aria-label','Выбрать лот '+(r.label||r.lot));
-    cb.onchange = () => { st.on = cb.checked; render(); totals(); };
+    // Перерисовываем весь список, только если он зависит от выбора («Только выбранные»);
+    // иначе меняем одну карточку — иначе на сотнях лотов каждое нажатие тормозит.
+    cb.onchange = () => {
+      st.on = cb.checked;
+      if(document.getElementById('only').value === 'sel') render();
+      else { el.classList.toggle('on', st.on); qr.classList.toggle('hide', !st.on); }
+      totals();
+    };
 
     const th = document.createElement('div');
     th.className='thumb';
