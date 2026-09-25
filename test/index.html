@@ -260,16 +260,12 @@
   .lightbox.open{display:flex;}
   .lightbox img{max-width:100%;max-height:100%;border-radius:8px;box-shadow:0 10px 50px rgba(0,0,0,.6);}
 
-  /* ---- широкий экран: две колонки и веточки чая по краям ---- */
+  /* ---- широкий экран: веточки чая по краям ---- */
   .deco{display:none;}
-  @media (min-width:1100px){
-    .wrap{max-width:1180px;}
-    .cards{display:grid;grid-template-columns:1fr 1fr;align-items:start;gap:12px;}
-  }
-  @media (min-width:1400px){
+  @media (min-width:1200px){
     .deco{
       display:block;position:fixed;top:0;bottom:0;z-index:0;pointer-events:none;
-      width:calc((100vw - 1180px) / 2 - 16px);max-width:340px;opacity:.5;color:var(--leaf);
+      width:calc((100vw - 960px) / 2 - 16px);max-width:340px;opacity:.5;color:var(--leaf);
     }
     .deco svg{width:100%;height:100%;}
     .deco-l{left:0;}
