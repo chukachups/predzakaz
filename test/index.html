@@ -167,10 +167,11 @@
 
   .empty{padding:40px 0;text-align:center;color:var(--ink-soft);font-size:14px;}
   .credit{
-    margin:28px 0 6px;text-align:center;color:var(--ink-soft);
-    font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:13px;letter-spacing:.02em;
+    display:flex;align-items:center;justify-content:center;gap:8px;margin:30px 0 6px;
+    color:var(--ink-soft);font-size:12.5px;letter-spacing:.03em;
   }
-  .credit::before,.credit::after{content:"";display:inline-block;width:28px;height:1px;background:var(--line);vertical-align:middle;margin:0 10px;}
+  .credit img{height:34px;width:auto;opacity:.75;}
+  .credit::before,.credit::after{content:"";width:28px;height:1px;background:var(--line);}
 
   /* ---- modal ---- */
   .overlay{
@@ -239,6 +240,7 @@
     opacity:.9;transition:opacity .15s;
   }
   .brandMark:hover{opacity:1;}
+  .brandFoot:hover .ok{opacity:1;}
 
   /* ---- строка состояния ---- */
   .ydbox{
@@ -365,7 +367,7 @@
 
   <div class="cards" id="cards"></div>
   <div class="empty" id="empty" style="display:none">Под фильтр ничего не подошло.</div>
-  <footer class="credit">Сделал Чукин Владимир</footer>
+  <footer class="credit"><img id="footLogo" alt="Логотип"><span>© 2026</span></footer>
 </div>
 
 <div class="overlay" id="overlay">
@@ -404,8 +406,8 @@
       <button class="btn btn-ghost" id="cartClear" style="background:#ece4d2;color:#2e4432">Сбросить</button>
       <button class="btn btn-main" id="cartMake" disabled>Сформировать список</button>
       <div class="brandFoot">
-        <img class="brandMark" id="brandMark" alt="Логотип" title="Сделал Чукин Владимир">
-        <span class="ok" id="brandOk">Сделал Чукин Владимир</span>
+        <img class="brandMark" id="brandMark" alt="Логотип" title="Чукин В. М.">
+        <span class="ok" id="brandOk">Чукин В. М.</span>
       </div>
     </div>
   </div>
@@ -749,6 +751,7 @@ document.getElementById('copy').onclick = async () => {
 };
 // Логотип в корзине — тот же, что в шапке (в файле для покупателей он встроен один раз).
 document.getElementById('brandMark').src = document.getElementById('heroLogo').src;
+document.getElementById('footLogo').src = document.getElementById('heroLogo').src;
 document.getElementById('brandMark').onclick = () => {
   const bo = document.getElementById('brandOk');
   bo.classList.add('show');
