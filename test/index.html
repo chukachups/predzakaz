@@ -88,6 +88,8 @@
     padding:5px 11px;border-radius:16px;font-size:12px;cursor:pointer;font-family:inherit;
   }
   .chip.on{background:var(--leaf);color:#fff;border-color:var(--leaf);}
+  .catSel{display:none;width:100%;padding:11px 12px;font-weight:600;}
+  .catSel.on{background:var(--leaf);color:#fff;border-color:var(--leaf);}
   .chip .n{opacity:.55;margin-left:4px;font-size:11px;}
   /* Разделы «Чай» / «Посуда» — показываются, только если есть посуда. */
   .secs{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
@@ -283,10 +285,15 @@
       position:fixed;top:auto;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));
       margin:0;border-radius:14px;box-shadow:0 8px 28px rgba(31,48,36,.4);
     }
-    /* Виды чая — одной строкой, листаются пальцем. */
-    .chips{flex-wrap:nowrap;overflow-x:auto;margin:0 -11px;padding:0 11px 2px;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
-    .chips::-webkit-scrollbar{display:none;}
-    .chip{flex-shrink:0;padding:7px 13px;font-size:12.5px;}
+    /* Виды — выпадающим списком вместо ряда кнопок, который приходилось листать. */
+    #cats{display:none;}
+    .catSel{display:block;}
+    /* Шрифт от 16px: иначе iPhone увеличивает страницу при нажатии на поле. */
+    input[type=search], select{font-size:16px;}
+    .searchrow input[type=search]{flex-basis:100%;}
+    .searchrow select{flex:1 1 0;min-width:0;}
+    #tops .chip{padding:6px 10px;font-size:12px;}
+    .chip{padding:7px 12px;font-size:12.5px;}
     .card{grid-template-columns:22px 84px 1fr;gap:10px;padding:11px;}
     .thumb,.thumb img{width:84px;height:126px;}
     /* Корзина — снизу, как на телефонах принято. */
@@ -353,6 +360,7 @@
     <div class="secs" id="secs"></div>
     <div class="chips" id="tops"></div>
     <div class="chips" id="cats"></div>
+    <select class="catSel" id="catSel" aria-label="Вид чая"></select>
   </div>
 
   <div class="cards" id="cards"></div>
@@ -471,6 +479,14 @@ function buildChips(){
     const n = inSec.filter(r=>r.cat===c).length;
     cc.appendChild(mk(c,c,fCat,v=>{fCat=v;buildChips();render();}, n));
   });
+
+  // На телефоне вместо длинного ряда кнопок — выпадающий список с теми же видами.
+  const cs = document.getElementById('catSel');
+  cs.innerHTML = '';
+  const opt = (label, val) => { const o = new Option(label, val, false, val === fCat); cs.add(o); };
+  opt('Все виды · ' + inSec.length, 'all');
+  [...new Set(inSec.map(r=>r.cat))].sort().forEach(c => opt(c + ' · ' + inSec.filter(r=>r.cat===c).length, c));
+  cs.classList.toggle('on', fCat !== 'all');
 }
 
 function visible(){
@@ -692,6 +708,7 @@ function renderCart(){
 document.getElementById('q').oninput = render;
 document.getElementById('sort').onchange = render;
 document.getElementById('only').onchange = render;
+document.getElementById('catSel').onchange = e => { fCat = e.target.value; buildChips(); render(); };
 document.getElementById('close').onclick = () => document.getElementById('overlay').classList.remove('open');
 document.getElementById('overlay').onclick = e => { if(e.target.id==='overlay') e.currentTarget.classList.remove('open'); };
 document.getElementById('lightbox').onclick = e => e.currentTarget.classList.remove('open');
