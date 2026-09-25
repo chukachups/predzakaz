@@ -441,6 +441,8 @@ ROWS.forEach(r => state[keyOf(r)] = {on:false, qty:1});
 let fSec = "tea", fCat = "all", fTop = "all", fmt = "short";
 // Раздел лота: весь каталог — чай, посуда приходит с sec: 'ware' (tg_lots.json).
 function secOf(r){ return r.sec || 'tea'; }
+// Везде считаем лоты, а не карточки: навеска и целый блин одного лота — один лот.
+function lotCount(rows){ return new Set(rows.map(r => r.lot)).size; }
 
 /* ---------- filters ---------- */
 function buildChips(){
@@ -458,7 +460,7 @@ function buildChips(){
     [['tea','Чай'], ['ware','Посуда']].forEach(([v, label]) => {
       const b = document.createElement('button');
       b.className = 'sec' + (v === fSec ? ' on' : '');
-      b.innerHTML = label + ' <span class="n">' + new Set(ROWS.filter(r => secOf(r) === v).map(r => r.lot)).size + '</span>';
+      b.innerHTML = label + ' <span class="n">' + lotCount(ROWS.filter(r => secOf(r) === v)) + '</span>';
       b.onclick = () => { fSec = v; fCat = 'all'; fTop = 'all'; buildChips(); render(); };
       sc.appendChild(b);
     });
@@ -469,14 +471,14 @@ function buildChips(){
   tc.innerHTML = '';
   tc.style.display = inSec.some(r => r.topAI || r.topSR) ? '' : 'none';
   tc.appendChild(mk('Все лоты','all',fTop,v=>{fTop=v;buildChips();render();}));
-  tc.appendChild(mk('Топ Антон и Иван','ai',fTop,v=>{fTop=v;buildChips();render();}, ROWS.filter(r=>r.topAI).length));
-  tc.appendChild(mk('Топ Стас и Рома','sr',fTop,v=>{fTop=v;buildChips();render();}, ROWS.filter(r=>r.topSR).length));
+  tc.appendChild(mk('Топ Антон и Иван','ai',fTop,v=>{fTop=v;buildChips();render();}, lotCount(inSec.filter(r=>r.topAI))));
+  tc.appendChild(mk('Топ Стас и Рома','sr',fTop,v=>{fTop=v;buildChips();render();}, lotCount(inSec.filter(r=>r.topSR))));
 
   const cc = document.getElementById('cats');
   cc.innerHTML = '';
   cc.appendChild(mk('Все виды','all',fCat,v=>{fCat=v;buildChips();render();}));
   [...new Set(inSec.map(r=>r.cat))].sort().forEach(c=>{
-    const n = inSec.filter(r=>r.cat===c).length;
+    const n = lotCount(inSec.filter(r=>r.cat===c));
     cc.appendChild(mk(c,c,fCat,v=>{fCat=v;buildChips();render();}, n));
   });
 
@@ -484,8 +486,8 @@ function buildChips(){
   const cs = document.getElementById('catSel');
   cs.innerHTML = '';
   const opt = (label, val) => { const o = new Option(label, val, false, val === fCat); cs.add(o); };
-  opt('Все виды · ' + inSec.length, 'all');
-  [...new Set(inSec.map(r=>r.cat))].sort().forEach(c => opt(c + ' · ' + inSec.filter(r=>r.cat===c).length, c));
+  opt('Все виды · ' + lotCount(inSec), 'all');
+  [...new Set(inSec.map(r=>r.cat))].sort().forEach(c => opt(c + ' · ' + lotCount(inSec.filter(r=>r.cat===c)), c));
   cs.classList.toggle('on', fCat !== 'all');
 }
 
