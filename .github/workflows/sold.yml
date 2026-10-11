@@ -1,0 +1,27 @@
+# Раз в час отмечает на сайте лоты, под которыми в архиве написано «Выкуплен».
+name: Выкупленные лоты
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: sold
+jobs:
+  sold:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 .github/scripts/sold.py
+      - name: Сохранить изменения
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898613+github-actions[bot]@users.noreply.github.com'
+          if ! git diff --quiet; then
+            git commit -am 'Выкупленные лоты (автоматически)'
+            git push
+          elif [ $(( $(date +%s) - $(git log -1 --format=%ct) )) -gt $((50*86400)) ]; then
+            # GitHub отключает расписание после 60 дней без изменений в репозитории.
+            git commit --allow-empty -m 'Расписание: не отключать'
+            git push
+          fi
