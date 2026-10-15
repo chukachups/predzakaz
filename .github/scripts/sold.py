@@ -61,16 +61,26 @@ def sold_names(post):
     for _, author, n, _ in msgs:
         if n:
             counts[author] = counts.get(author, 0) + 1
-    channel = max(counts, key=counts.get)
-    return {'tg-%d-%d' % (mid, i) for mid, author, n, text in msgs
+    channel = max(counts, key=counts.get) if counts else ''
+    sold = {'tg-%d-%d' % (mid, i) for mid, author, n, text in msgs
             if author == channel and 'выкуплен' in text.lower() for i in range(n)}
+    seen = {'tg-%d-%d' % (mid, i) for mid, author, n, text in msgs if author == channel for i in range(n)}
+    return sold, seen if channel else set()
 
 
 def main():
     pages = {p: open(p, encoding='utf-8').read() for p in PAGES}
     post = json.loads(re.search(r'window\.TG_POST = (.*?);\n', pages['index.html']).group(1))
-    sold = sold_names(post)
+    sold, seen = sold_names(post)
     print('Выкуплено фото:', len(sold))
+    # Telegram иногда отдаёт комментарии без фото или без имён авторов. По таким
+    # данным отметки сняли бы с проданных лотов — лучше ничего не менять до следующего раза.
+    for path, s in pages.items():
+        names = [p['name'] for p in json.loads(re.search(r'window\.TG_PHOTOS = (\[.*?\]);\n', s).group(1))]
+        lost = [n for n in names if n not in seen]
+        if lost:
+            print('Telegram прислал неполные данные (%s: не видно %d фото) — ничего не меняю' % (path, len(lost)))
+            return
     for path, s in pages.items():
         m = re.search(r'window\.TG_PHOTOS = (\[.*?\]);\n', s)
         photos = json.loads(m.group(1))
