@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Предзаказ чая — макет для компьютера</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#efe9dc; --paper-2:#e6dfcf; --ink:#1d1a15; --ink-soft:#5d5546; --line:#cfc5b0;
+  --leaf:#3d5a40; --leaf-dark:#24382a; --seal:#a33a26;
+  --ease:cubic-bezier(.2,.7,.1,1); --ease-in:cubic-bezier(.6,0,.4,1);
+  --serif:'Cormorant Garamond',Georgia,serif; --sans:'Onest',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body::after{ /* бумажное зерно */
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:200;opacity:.35;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .4 0 0 0 0 .3 0 0 0 .18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+button{font:inherit;color:inherit;cursor:pointer}
+img{display:block}
+.wrap{max-width:1320px;margin:0 auto;padding:0 56px}
+
+/* ---------- первый экран ---------- */
+.hero{min-height:100vh;display:grid;grid-template-rows:auto 1fr auto;padding:36px 0 40px;position:relative;overflow:hidden}
+.hero-top{display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:14px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.brand img{height:44px;width:auto;filter:brightness(.25) sepia(.5)}
+.hero-meta{font-size:13px;color:var(--ink-soft);letter-spacing:.04em}
+.hero-title{align-self:center;margin:0;font-family:var(--serif);font-weight:600;line-height:.86;letter-spacing:-.02em;font-size:clamp(84px,12.5vw,200px)}
+.hero-title .ln{display:block;overflow:hidden;padding-bottom:.06em}
+.hero-title .ln > span{display:inline-block;transform:translateY(105%);animation:rise 1.1s var(--ease) forwards}
+.hero-title .ln:nth-child(2) > span{animation-delay:.12s;font-style:italic;color:var(--leaf);padding-left:1.4em}
+@keyframes rise{to{transform:none}}
+.hero-bottom{display:grid;grid-template-columns:1fr auto;align-items:end;gap:40px;opacity:0;animation:fade 1s .7s var(--ease) forwards}
+.hero-bottom p{margin:0;max-width:420px;font-size:16px;color:var(--ink-soft)}
+.counts{display:flex;gap:44px}
+.counts div{display:flex;flex-direction:column}
+.counts b{font-family:var(--serif);font-size:56px;line-height:1;font-weight:600}
+.counts span{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+.cue{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);width:1px;height:56px;background:var(--line);overflow:hidden}
+.cue::after{content:"";position:absolute;left:0;top:-40%;width:1px;height:40%;background:var(--ink);animation:cue 2.2s var(--ease-in) infinite}
+@keyframes cue{to{top:110%}}
+@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.branch{position:absolute;right:-40px;top:8%;width:46vw;max-width:640px;height:auto;color:var(--leaf);opacity:.55;pointer-events:none}
+.branch path{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.6s .3s var(--ease) forwards}
+.branch .leafs path{animation-duration:1.6s}
+.branch .leafs path:nth-child(1){animation-delay:1.2s}.branch .leafs path:nth-child(2){animation-delay:1.35s}
+.branch .leafs path:nth-child(3){animation-delay:1.5s}.branch .leafs path:nth-child(4){animation-delay:1.65s}
+.branch .leafs path:nth-child(5){animation-delay:1.8s}.branch .leafs path:nth-child(6){animation-delay:1.95s}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* ---------- верхняя панель ---------- */
+.nav{position:fixed;left:0;right:0;top:0;z-index:50;transform:translateY(-110%);transition:transform .6s var(--ease)}
+.nav.show{transform:none}
+.nav-in{margin:12px auto 0;max-width:1320px;padding:0 56px}
+.nav-bar{display:flex;align-items:center;gap:18px;padding:10px 10px 10px 18px;border-radius:18px;background:rgba(239,233,220,.82);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);box-shadow:0 1px 0 var(--line),0 18px 40px -24px rgba(29,26,21,.45)}
+.nav-bar .brand img{height:30px}
+.seg{position:relative;display:grid;grid-template-columns:1fr 1fr;padding:4px;border-radius:12px;background:var(--paper-2)}
+.seg button{position:relative;z-index:1;border:0;background:none;height:38px;padding:0 22px;font-weight:600;font-size:14px;transition:color .4s var(--ease)}
+.seg button.on{color:var(--paper)}
+.seg i{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:9px;background:var(--ink);transition:transform .55s var(--ease)}
+.seg[data-i="1"] i{transform:translateX(100%)}
+.search{flex:1;display:flex;align-items:center;gap:10px;height:46px;padding:0 14px;border-radius:12px;border:1px solid transparent;transition:border-color .3s,background .3s}
+.search:focus-within{border-color:var(--line);background:rgba(255,255,255,.4)}
+.search input{flex:1;border:0;background:none;font:inherit;font-size:15px;outline:none;color:var(--ink)}
+.cartBtn{display:flex;align-items:center;gap:14px;height:50px;padding:0 8px 0 18px;border:0;border-radius:14px;background:var(--leaf-dark);color:#f3eee2;transition:transform .3s var(--ease),background .3s}
+.cartBtn:hover{background:var(--leaf)}
+.cartBtn .sum{font-family:var(--serif);font-size:22px;font-weight:700;min-width:70px;text-align:right}
+.cartBtn .n{display:grid;place-items:center;min-width:34px;height:34px;padding:0 8px;border-radius:10px;background:#f3eee2;color:var(--leaf-dark);font-weight:700}
+.cartBtn.bump{animation:bump .5s var(--ease)}
+@keyframes bump{30%{transform:scale(1.07)}}
+
+/* ---------- каталог ---------- */
+.catalog{padding:120px 0 140px}
+.cat-head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:40px;margin-bottom:34px}
+.sec-title{margin:0;font-family:var(--serif);font-weight:600;font-size:clamp(70px,8vw,128px);line-height:.9;letter-spacing:-.02em;overflow:hidden}
+.sec-title span{display:inline-block;transition:transform .6s var(--ease),opacity .6s}
+.sec-title.out span{transform:translateY(-100%);opacity:0}
+.sec-title.in span{transform:translateY(100%);opacity:0;transition:none}
+.sec-note{font-size:14px;color:var(--ink-soft);max-width:300px;text-align:right}
+.cats{display:flex;flex-wrap:wrap;gap:6px 30px;padding:18px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--line)}
+.cats button{position:relative;border:0;background:none;padding:6px 0;font-size:15px;color:var(--ink-soft);transition:color .3s}
+.cats button sup{font-size:10px;margin-left:3px;color:var(--ink-soft)}
+.cats button::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1.5px;background:var(--ink);transform:scaleX(0);transform-origin:right;transition:transform .5s var(--ease)}
+.cats button:hover,.cats button.on{color:var(--ink)}
+.cats button.on::after{transform:scaleX(1);transform-origin:left}
+
+.list{list-style:none;margin:0;padding:0;transition:opacity .35s,transform .35s var(--ease)}
+.list.fading{opacity:0;transform:translateY(10px)}
+.row{position:relative;isolation:isolate;display:grid;grid-template-columns:110px 64px minmax(0,1fr) 150px 170px;gap:28px;align-items:center;padding:22px 18px;border-bottom:1px solid var(--line);opacity:0;transform:translateY(24px)}
+.row.vis{opacity:1;transform:none;transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.row::before{content:"";position:absolute;inset:0;background:var(--paper-2);transform:scaleY(0);transform-origin:bottom;transition:transform .45s var(--ease);z-index:-1}
+.row:hover::before{transform:scaleY(1)}
+.row.on::before{transform:scaleY(1);background:#e3e3d0}
+.lot{font-family:var(--serif);font-size:44px;font-weight:600;line-height:1;color:var(--line);transition:color .4s,transform .5s var(--ease)}
+.row:hover .lot{color:var(--ink);transform:translateX(6px)}
+.row.on .lot{color:var(--seal)}
+.thumb{width:64px;height:92px;border:0;padding:0;border-radius:6px;overflow:hidden;background:var(--paper-2)}
+.thumb img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.row:hover .thumb img{transform:scale(1.08)}
+.info{min-width:0}
+.info .cat{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--leaf);font-weight:600}
+.info h3{margin:4px 0 6px;font-family:var(--serif);font-size:28px;line-height:1.08;font-weight:600}
+.info p{margin:0;font-family:var(--serif);font-style:italic;font-size:18px;line-height:1.35;color:var(--ink-soft);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.price{text-align:right}
+.price b{display:block;font-family:var(--serif);font-size:30px;font-weight:700;line-height:1}
+.price span{font-size:12px;color:var(--ink-soft)}
+.act{display:flex;justify-content:flex-end}
+.add{position:relative;height:48px;width:150px;border-radius:999px;border:1px solid var(--ink);background:none;font-weight:600;font-size:14px;overflow:hidden;transition:color .4s var(--ease)}
+.add::before{content:"";position:absolute;inset:0;background:var(--ink);border-radius:inherit;transform:translateY(101%);transition:transform .45s var(--ease)}
+.add:hover{color:var(--paper)}
+.add:hover::before{transform:none}
+.add span{position:relative}
+.qty{display:flex;align-items:center;justify-content:space-between;width:150px;height:48px;border-radius:999px;background:var(--leaf-dark);color:#f3eee2;animation:pop .45s var(--ease)}
+.qty button{width:48px;height:48px;border:0;background:none;color:inherit;font-size:22px;border-radius:50%;transition:background .2s}
+.qty button:hover{background:rgba(255,255,255,.1)}
+.qty b{font-size:16px}
+@keyframes pop{from{transform:scale(.85);opacity:.4}}
+.empty{padding:80px 0;text-align:center;font-family:var(--serif);font-size:30px;color:var(--ink-soft)}
+
+/* фото, которое плывёт за курсором */
+.float{position:fixed;left:0;top:0;width:250px;height:370px;border-radius:10px;overflow:hidden;pointer-events:none;z-index:40;opacity:0;transform:translate(-50%,-50%) scale(.6) rotate(-4deg);transition:opacity .35s,transform .5s var(--ease);box-shadow:0 30px 60px -20px rgba(29,26,21,.55)}
+.float.on{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(-3deg)}
+.float img{width:100%;height:100%;object-fit:cover}
+
+/* летящая точка в корзину */
+.dot{position:fixed;z-index:120;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:var(--seal);pointer-events:none}
+
+/* ---------- корзина ---------- */
+.veil{position:fixed;inset:0;z-index:90;background:rgba(29,26,21,.35);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:opacity .5s,visibility .5s}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:100;width:min(480px,100vw);background:var(--paper);display:flex;flex-direction:column;transform:translateX(102%);transition:transform .7s var(--ease);box-shadow:-30px 0 60px -30px rgba(29,26,21,.5)}
+.cart-open .veil{opacity:1;visibility:visible}
+.cart-open .drawer{transform:none}
+.dr-head{display:flex;align-items:baseline;justify-content:space-between;padding:34px 34px 20px;border-bottom:1px solid var(--line)}
+.dr-head h2{margin:0;font-family:var(--serif);font-size:48px;font-weight:600;line-height:1}
+.x{width:44px;height:44px;border:1px solid var(--line);border-radius:50%;background:none;font-size:20px;transition:transform .4s var(--ease),border-color .3s}
+.x:hover{transform:rotate(90deg);border-color:var(--ink)}
+.dr-list{flex:1;overflow:auto;padding:8px 34px}
+.ci{display:grid;grid-template-columns:52px 1fr auto;gap:16px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line);opacity:0;transform:translateX(30px)}
+.cart-open .ci{opacity:1;transform:none;transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.ci img{width:52px;height:74px;object-fit:cover;border-radius:5px}
+.ci b{font-family:var(--serif);font-size:20px;font-weight:600;line-height:1.1;display:block}
+.ci small{color:var(--ink-soft)}
+.ci .s{font-family:var(--serif);font-size:20px;font-weight:700;white-space:nowrap}
+.dr-empty{padding:60px 0;text-align:center;font-family:var(--serif);font-style:italic;font-size:24px;color:var(--ink-soft)}
+.dr-foot{padding:24px 34px 34px;border-top:1px solid var(--ink)}
+.total{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px}
+.total span{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+.total b{font-family:var(--serif);font-size:40px;font-weight:700}
+.send{width:100%;height:58px;border:0;border-radius:14px;background:var(--seal);color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;gap:10px;transition:filter .3s,transform .3s var(--ease)}
+.send:hover{filter:brightness(1.08);transform:translateY(-2px)}
+
+/* ---------- просмотр фото ---------- */
+.lb{position:fixed;inset:0;z-index:150;display:grid;place-items:center;background:rgba(20,18,14,0);visibility:hidden;transition:background .5s,visibility .5s}
+.lb.on{background:rgba(20,18,14,.86);visibility:visible}
+.lb img{max-height:88vh;max-width:90vw;border-radius:8px;box-shadow:0 40px 80px rgba(0,0,0,.5)}
+
+footer{padding:60px 0 50px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--ink-soft)}
+footer img{height:34px;filter:brightness(.25) sepia(.5)}
+
+:focus-visible{outline:2px solid var(--seal);outline-offset:3px}
+
+@media (max-width:900px){
+  .wrap,.nav-in{padding:0 18px}
+  .row{grid-template-columns:64px minmax(0,1fr);gap:14px;padding:18px 6px}
+  .lot{display:none}
+  .price,.act{grid-column:2;text-align:left;justify-content:flex-start}
+  .hero-bottom{grid-template-columns:1fr}
+  .search{display:none}
+  .float{display:none}
+  .branch{width:80vw;opacity:.25}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-delay:0s !important;transition-duration:.01ms !important}
+  .row{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap hero">
+  <div class="hero-top">
+    <div class="brand"><img src="logo.png" alt="Логотип"><span>Айро чай</span></div>
+    <div class="hero-meta">Предзаказ 2026</div>
+  </div>
+  <h1 class="hero-title"><span class="ln"><span>Предзаказ</span></span><span class="ln"><span>чая</span></span></h1>
+  <div class="hero-bottom">
+    <p>Цена указана розничная, без скидок и опта. Отметьте понравившийся товар и выберите количество.</p>
+    <div class="counts">
+      <div><b id="nTea">0</b><span>видов чая</span></div>
+      <div><b id="nWare">0</b><span>предметов посуды</span></div>
+    </div>
+  </div>
+  <svg class="branch" viewBox="0 0 600 600" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+    <path pathLength="1" d="M560 40 C 470 120, 420 210, 360 300 S 230 470, 90 560"/>
+    <path pathLength="1" d="M430 190 C 470 230, 500 250, 540 260"/>
+    <path pathLength="1" d="M300 380 C 250 360, 220 330, 200 290"/>
+    <g class="leafs">
+      <path pathLength="1" d="M540 260 C 520 220, 470 205, 430 190 C 470 240, 500 262, 540 260 Z"/>
+      <path pathLength="1" d="M200 290 C 240 300, 280 340, 300 380 C 250 372, 212 336, 200 290 Z"/>
+      <path pathLength="1" d="M470 130 C 520 100, 560 110, 590 140 C 550 160, 500 158, 470 130 Z"/>
+      <path pathLength="1" d="M380 270 C 420 300, 430 345, 420 390 C 385 360, 372 315, 380 270 Z"/>
+      <path pathLength="1" d="M240 430 C 200 420, 160 440, 140 480 C 185 486, 222 466, 240 430 Z"/>
+      <path pathLength="1" d="M150 510 C 170 470, 205 455, 240 455 C 222 492, 190 512, 150 510 Z"/>
+    </g>
+  </svg>
+  <a class="cue" href="#catalog" aria-label="К каталогу"></a>
+</header>
+
+<nav class="nav" id="nav">
+  <div class="nav-in"><div class="nav-bar">
+    <div class="brand"><img src="logo.png" alt=""><span>Айро чай</span></div>
+    <div class="seg" id="seg" data-i="0"><i></i><button type="button" class="on" data-sec="tea">Чай</button><button type="button" data-sec="ware">Посуда</button></div>
+    <label class="search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+      <input id="q" type="search" placeholder="Название, вкус или номер лота" aria-label="Поиск">
+    </label>
+    <button type="button" class="cartBtn" id="cartBtn"><span>Заказ</span><span class="sum" id="sum">0 ₽</span><span class="n" id="cnt">0</span></button>
+  </div></div>
+</nav>
+
+<main class="wrap catalog" id="catalog">
+  <div class="cat-head">
+    <h2 class="sec-title" id="secTitle"><span>Чай</span></h2>
+    <div class="sec-note">Наведите на строку, чтобы увидеть фото. Нажмите на фото, чтобы открыть его крупно.</div>
+  </div>
+  <div class="cats" id="cats"></div>
+  <ul class="list" id="list"></ul>
+</main>
+
+<footer class="wrap"><img src="logo.png" alt="Логотип"><span>© 2026</span></footer>
+
+<div class="float" id="float"><img alt=""></div>
+<div class="veil" id="veil"></div>
+<aside class="drawer" id="drawer" aria-label="Корзина">
+  <div class="dr-head"><h2>Ваш заказ</h2><button type="button" class="x" id="close" aria-label="Закрыть">✕</button></div>
+  <div class="dr-list" id="drList"></div>
+  <div class="dr-foot">
+    <div class="total"><span>Итого</span><b id="total">0 ₽</b></div>
+    <button type="button" class="send">Отправить в Telegram
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+  </div>
+</aside>
+<div class="lb" id="lb"><img alt=""></div>
+
+<script>
+const LOTS = [{"k": "tg-23796-0", "lot": 60, "sec": "ware", "cat": "Пиалы", "name": "Пиала, чаочжоуская керамика (иероглиф «чай»)", "price": 145, "pt": "145₽ / 1 шт.", "c": ""}, {"k": "tg-23797-0", "lot": 61, "sec": "ware", "cat": "Пиалы", "name": "Пиала, чаочжоуская керамика (белая, золотой ободок)", "price": 145, "pt": "145₽ / 1 шт.", "c": ""}, {"k": "tg-23798-0", "lot": 62, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, чаочжоуская керамика, 175 мл (белая, золотой ободок)", "price": 795, "pt": "795₽ / 1 шт.", "c": ""}, {"k": "tg-23799-0", "lot": 63, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, чаочжоуская керамика, 140 мл (пейзаж с пагодой)", "price": 795, "pt": "795₽ / 1 шт.", "c": ""}, {"k": "tg-23801-0", "lot": 65, "sec": "ware", "cat": "Пиалы", "name": "Пиала, костяной фарфор, 60 мл (белая)", "price": 245, "pt": "245₽ / 1 шт.", "c": ""}, {"k": "tg-23803-0", "lot": 67, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, костяной фарфор, 150 мл (белая)", "price": 995, "pt": "995₽ / 1 шт.", "c": ""}, {"k": "tg-23804-0", "lot": 68, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, костяной фарфор, 110 мл (белая)", "price": 895, "pt": "895₽ / 1 шт.", "c": ""}, {"k": "tg-23807-0", "lot": 71, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, чаочжоуская керамика, 180 мл (золотой орнамент)", "price": 695, "pt": "695₽ / 1 шт.", "c": ""}, {"k": "tg-23808-0", "lot": 72, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, чаочжоуская керамика, 180 мл (иероглиф «чай»)", "price": 695, "pt": "695₽ / 1 шт.", "c": ""}, {"k": "tg-23809-0", "lot": 73, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, чаочжоуская керамика, 110 мл (иероглиф «чай»)", "price": 595, "pt": "595₽ / 1 шт.", "c": ""}, {"k": "tg-23956-0", "lot": 100, "sec": "tea", "cat": "Улун Фэн Хуан Дань Цун", "name": "ФХДЦ Да У Е", "price": 695, "pt": "695₽ / 100 г", "c": "Кофейно-сушеноягодная, лёгкая древесная терпкость, немного вайба хорошего Хэй Улуна. Не тропики, не цветы, а совсем другая интересная Фэха для разнообразия; любителям более тёмных материй зайдёт на ура."}, {"k": "tg-23957-0", "lot": 101, "sec": "tea", "cat": "Улун Фэн Хуан Дань Цун", "name": "ФХДЦ Хуан Чжи Сян", "price": 995, "pt": "995₽ / 100 г", "c": "Классный, нежный, вафельный. На 2-й пролив сменился на кисленькую, щавелевую кислинку, с лёгкими травянистыми нотами. Очень свежий чай — круто его попить зимой, чтобы вернуться в летние тёплые деньки."}, {"k": "tg-23958-0", "lot": 102, "sec": "tea", "cat": "Улун Фэн Хуан Дань Цун", "name": "ФХДЦ Хуан Чжи Сян №3, по технологии Да Хун Пао", "price": 495, "pt": "495₽ / 100 г", "c": "Шоколадный, черёмуховый, сладкий, иной вкус от привычных тропиков. На 2–3 пролив ушёл в жареные дефолтные семечки."}, {"k": "tg-23959-0", "lot": 103, "sec": "tea", "cat": "Улун Фэн Хуан Дань Цун", "name": "ФХДЦ Хуан Чжи Сян №2", "price": 695, "pt": "695₽ / 100 г", "c": "Пахнет выпечкой, Габой — необычно. Вкус Габы. Несвойственно насыщенная, при этом не сладкая, не терпкая, и насыщенность в теле, а не в яркости вкуса. Что-то необычное, уникальное, фруктовое."}, {"k": "tg-23960-0", "lot": 104, "sec": "tea", "cat": "Улун Фэн Хуан Дань Цун", "name": "ФХДЦ Я Ши Сян", "price": 495, "pt": "495₽ / 100 г", "c": "Без терпкости, нежный, сливочный, сладкий, спокойный."}, {"k": "tg-23961-0", "lot": 105, "sec": "tea", "cat": "Улун Фэн Хуан Дань Цун", "name": "ФХДЦ Юй Лань Сян, аромат магнолии", "price": 495, "pt": "495₽ / 100 г", "c": "Чуть цитрусовой цедрости, есть немного от Дун Дина/Алишаня/Тегуаньиня. На 2–3 пролив немного Лунцзина. На 3–4 пролив пошла виноградная косточка, причём ярчайшая."}, {"k": "tg-23962-0", "lot": 106, "sec": "tea", "cat": "Улун Фэн Хуан Дань Цун", "name": "ФХДЦ Лань Хуа Сян", "price": 595, "pt": "595₽ / 100 г", "c": "Красное яблоко, мякоть, прикольный."}, {"k": "tg-23963-0", "lot": 107, "sec": "tea", "cat": "Улун Фэн Хуан Дань Цун", "name": "ФХДЦ Юй Лань Сян №2, аромат магнолии", "price": 695, "pt": "695₽ / 100 г", "c": "Чай про первые секунды во время глотка, интересно, персиковые оттенки, игривость."}, {"k": "tg-23964-0", "lot": 108, "sec": "tea", "cat": "Улун Фэн Хуан Дань Цун", "name": "ФХДЦ Ми Лань Сян №2", "price": 995, "pt": "995₽ / 100 г", "c": "Мягкая, интересная, что-то есть. Сухая земляника, какой-то пирог. Но очень тонко. Не покидает чувство, что дома это очень интересно раскроется."}, {"k": "tg-23965-0", "lot": 109, "sec": "tea", "cat": "Улун Фэн Хуан Дань Цун", "name": "ФХДЦ Лань Хуа Сян №2", "price": 895, "pt": "895₽ / 100 г", "c": "Ещё одна бархатистая сладость красного яблока/персика, мясистая текстура вкуса. Мякоть."}, {"k": "tg-23966-0", "lot": 110, "sec": "tea", "cat": "Улун Фэн Хуан Дань Цун", "name": "ФХДЦ Тун Тянь Сян", "price": 595, "pt": "595₽ / 25 г", "c": "Премлот. Клюква на первый пролив. Немного бамбука. Мармелад, опять клюква, холодок, чуть мятный. Дорогой, сложный, в премку."}, {"k": "tg-23967-0", "lot": 111, "sec": "tea", "cat": "Улун Фэн Хуан Дань Цун", "name": "ФХДЦ Син Жэнь Сян, аромат абрикосовой косточки", "price": 895, "pt": "895₽ / 25 г", "c": "Премлот. Ещё одна на премку. Стас укайфовался, и в целом не беспочвенно. Сложно описать, но круто, иначе! Сладкий, чистый, абрикос, яркий. Долгое послевкусие. Мощный. Жир!"}, {"k": "tg-24513-0", "lot": 142, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, ручная роспись, 100 мл (каллиграфия)", "price": 2495, "pt": "2495₽ / 1 шт.", "c": "В наличии 1 шт."}, {"k": "tg-24514-0", "lot": 143, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, ручная роспись, 110 мл (пагода и птицы)", "price": 2495, "pt": "2495₽ / 1 шт.", "c": "В наличии 1 шт."}, {"k": "tg-24515-0", "lot": 144, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, ручная роспись, 150 мл (орхидея)", "price": 2495, "pt": "2495₽ / 1 шт.", "c": "В наличии 1 шт."}, {"k": "tg-24517-0", "lot": 146, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, ручная роспись, 150 мл (цветной горный пейзаж)", "price": 2195, "pt": "2195₽ / 1 шт.", "c": "В наличии 1 шт."}, {"k": "tg-24518-0", "lot": 147, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, фарфор Дэхуа, 150 мл (золотой карп)", "price": 2195, "pt": "2195₽ / 1 шт.", "c": "В наличии 1 шт."}, {"k": "tg-24520-0", "lot": 148, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 50 мл (пейзаж с беседкой)", "price": 115, "pt": "115₽ / 1 шт.", "c": ""}, {"k": "tg-24522-0", "lot": 149, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, 115 мл (зелёная, золотой бамбук)", "price": 795, "pt": "795₽ / 1 шт.", "c": ""}, {"k": "tg-24523-0", "lot": 150, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, 115 мл (розовая, цветущая слива и пион)", "price": 795, "pt": "795₽ / 1 шт.", "c": ""}, {"k": "tg-24524-0", "lot": 151, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, 115 мл (красная, белая магнолия)", "price": 795, "pt": "795₽ / 1 шт.", "c": ""}, {"k": "tg-24525-0", "lot": 152, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, 140 мл (синяя, цветочный орнамент)", "price": 795, "pt": "795₽ / 1 шт.", "c": ""}, {"k": "tg-24526-0", "lot": 153, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, 140 мл (терракотовая, цветочный орнамент)", "price": 795, "pt": "795₽ / 1 шт.", "c": ""}, {"k": "tg-24527-0", "lot": 154, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, 140 мл (горный пейзаж, оранжевая глазурь)", "price": 795, "pt": "795₽ / 1 шт.", "c": ""}, {"k": "tg-24528-0", "lot": 155, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, ручная роспись, 140 мл (каллиграфия, оранжевая глазурь)", "price": 995, "pt": "995₽ / 1 шт.", "c": ""}, {"k": "tg-24529-0", "lot": 156, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 50 мл (пагода в горах, оранжевая глазурь)", "price": 145, "pt": "145₽ / 1 шт.", "c": ""}, {"k": "tg-24530-0", "lot": 157, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 50 мл (ветка хурмы)", "price": 145, "pt": "145₽ / 1 шт.", "c": ""}, {"k": "tg-24531-0", "lot": 158, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 50 мл (фазан на ветке)", "price": 145, "pt": "145₽ / 1 шт.", "c": ""}, {"k": "tg-24532-0", "lot": 159, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 60 мл (лотос, оранжевая глазурь)", "price": 145, "pt": "145₽ / 1 шт.", "c": ""}, {"k": "tg-24533-0", "lot": 160, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 40 мл (кракелюр, розовый лотос)", "price": 145, "pt": "145₽ / 1 шт.", "c": ""}, {"k": "tg-24534-0", "lot": 161, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 40 мл (кракелюр, синий лотос)", "price": 145, "pt": "145₽ / 1 шт.", "c": ""}, {"k": "tg-24535-0", "lot": 162, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 50 мл (розовая, цветущая слива)", "price": 195, "pt": "195₽ / 1 шт.", "c": ""}, {"k": "tg-24536-0", "lot": 163, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 50 мл (зелёная, золотой бамбук)", "price": 195, "pt": "195₽ / 1 шт.", "c": ""}, {"k": "tg-24537-0", "lot": 164, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 50 мл (красная, белая магнолия)", "price": 195, "pt": "195₽ / 1 шт.", "c": ""}, {"k": "tg-24538-0", "lot": 165, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 50 мл (белая матовая)", "price": 185, "pt": "185₽ / 1 шт.", "c": ""}, {"k": "tg-24539-0", "lot": 166, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 60 мл (белая, пагода в горах)", "price": 115, "pt": "115₽ / 1 шт.", "c": ""}, {"k": "tg-24540-0", "lot": 167, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 50 мл (креветка)", "price": 125, "pt": "125₽ / 1 шт.", "c": ""}, {"k": "tg-24541-0", "lot": 168, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 65 мл (синий лотос)", "price": 125, "pt": "125₽ / 1 шт.", "c": ""}, {"k": "tg-24542-0", "lot": 169, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 65 мл (цикада на бамбуке)", "price": 125, "pt": "125₽ / 1 шт.", "c": ""}, {"k": "tg-24543-0", "lot": 170, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 65 мл (ветка бамбука)", "price": 125, "pt": "125₽ / 1 шт.", "c": ""}, {"k": "tg-24544-0", "lot": 171, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 65 мл (сосна на скале)", "price": 125, "pt": "125₽ / 1 шт.", "c": ""}, {"k": "tg-24545-0", "lot": 172, "sec": "ware", "cat": "Гайвани", "name": "Гайвань с ситом, 160 мл (пагода в горах)", "price": 595, "pt": "595₽ / 1 шт.", "c": ""}, {"k": "tg-24546-0", "lot": 173, "sec": "ware", "cat": "Гайвани", "name": "Гайвань с ситом, 160 мл (цветной горный пейзаж)", "price": 595, "pt": "595₽ / 1 шт.", "c": ""}, {"k": "tg-24547-0", "lot": 174, "sec": "ware", "cat": "Гайвани", "name": "Гайвань с ситом, 160 мл (бирюзовые горы, беседка)", "price": 595, "pt": "595₽ / 1 шт.", "c": ""}, {"k": "tg-24548-0", "lot": 175, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, 150 мл (птицы и хурма)", "price": 495, "pt": "495₽ / 1 шт.", "c": ""}, {"k": "tg-24549-0", "lot": 176, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, 150 мл (синий цветочный орнамент)", "price": 495, "pt": "495₽ / 1 шт.", "c": ""}, {"k": "tg-24551-0", "lot": 177, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, 150 мл (панда и цветы)", "price": 495, "pt": "495₽ / 1 шт.", "c": ""}, {"k": "tg-24552-0", "lot": 178, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, 150 мл (синие бабочки)", "price": 495, "pt": "495₽ / 1 шт.", "c": ""}, {"k": "tg-24553-0", "lot": 179, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, 150 мл (ромашки)", "price": 495, "pt": "495₽ / 1 шт.", "c": ""}, {"k": "tg-24554-0", "lot": 180, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, 150 мл (капуста)", "price": 495, "pt": "495₽ / 1 шт.", "c": ""}, {"k": "tg-24555-0", "lot": 181, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, 150 мл (синие пионы и хризантемы)", "price": 495, "pt": "495₽ / 1 шт.", "c": ""}, {"k": "tg-24556-0", "lot": 182, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, 150 мл (пастельные цветы, подвеска с жемчугом)", "price": 795, "pt": "795₽ / 1 шт.", "c": ""}, {"k": "tg-24561-0", "lot": 187, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 50 мл (сельский пейзаж, оранжевый ободок)", "price": 115, "pt": "115₽ / 1 шт.", "c": ""}, {"k": "tg-24562-0", "lot": 188, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 60 мл (красный бамбук, каллиграфия)", "price": 115, "pt": "115₽ / 1 шт.", "c": ""}, {"k": "tg-24563-0", "lot": 189, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 60 мл (пастельные цветы)", "price": 125, "pt": "125₽ / 1 шт.", "c": ""}, {"k": "tg-24564-0", "lot": 190, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 50 мл (бирюзовые горы)", "price": 115, "pt": "115₽ / 1 шт.", "c": ""}, {"k": "tg-24565-0", "lot": 191, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 50 мл (синие пионы и хризантемы)", "price": 115, "pt": "115₽ / 1 шт.", "c": ""}, {"k": "tg-24566-0", "lot": 192, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 50 мл (синие бабочки)", "price": 115, "pt": "115₽ / 1 шт.", "c": ""}, {"k": "tg-24567-0", "lot": 193, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 50 мл (ветка хурмы, светлая)", "price": 115, "pt": "115₽ / 1 шт.", "c": ""}, {"k": "tg-24568-0", "lot": 194, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 50 мл (ромашки)", "price": 115, "pt": "115₽ / 1 шт.", "c": ""}, {"k": "tg-24569-0", "lot": 195, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 50 мл (капуста)", "price": 115, "pt": "115₽ / 1 шт.", "c": ""}, {"k": "tg-24570-0", "lot": 196, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 60 мл (синий лотос, бело-синяя)", "price": 115, "pt": "115₽ / 1 шт.", "c": ""}, {"k": "tg-24571-0", "lot": 197, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 60 мл (бамбук и каллиграфия)", "price": 125, "pt": "125₽ / 1 шт.", "c": ""}, {"k": "tg-24572-0", "lot": 198, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 70 мл (белая матовая, пагода в горах)", "price": 165, "pt": "165₽ / 1 шт.", "c": ""}, {"k": "tg-24573-0", "lot": 199, "sec": "ware", "cat": "Пиалы", "name": "Пиала, 70 мл (белая матовая, цветные горы и журавль)", "price": 165, "pt": "165₽ / 1 шт.", "c": ""}, {"k": "tg-24574-0", "lot": 200, "sec": "ware", "cat": "Чабани", "name": "Чабань, 43×25×5 см (каменная вставка, деревянная рама)", "price": 4495, "pt": "4495₽ / 1 шт.", "c": ""}, {"k": "tg-24575-0", "lot": 201, "sec": "ware", "cat": "Чабани", "name": "Чабань, 51×24 см (дерево)", "price": 4495, "pt": "4495₽ / 1 шт.", "c": ""}, {"k": "tg-24576-0", "lot": 202, "sec": "ware", "cat": "Чабани", "name": "Чабань, 50×18 см (дерево, решётка-круг, волна гор)", "price": 2495, "pt": "2495₽ / 1 шт.", "c": ""}, {"k": "tg-24577-0", "lot": 203, "sec": "ware", "cat": "Чабани", "name": "Чабань, 36×27 см (чёрная поверхность, деревянная рама)", "price": 1495, "pt": "1495₽ / 1 шт.", "c": ""}, {"k": "tg-24578-0", "lot": 204, "sec": "ware", "cat": "Чабани", "name": "Чабань, 24×15 см (дерево, фигурный край)", "price": 995, "pt": "995₽ / 1 шт.", "c": ""}, {"k": "tg-24579-0", "lot": 205, "sec": "ware", "cat": "Чабани", "name": "Чабань, 30×14 см (дерево, овальная)", "price": 995, "pt": "995₽ / 1 шт.", "c": ""}, {"k": "tg-24580-0", "lot": 206, "sec": "ware", "cat": "Чабани", "name": "Чабань, 30×20 см (дерево, прямоугольная)", "price": 995, "pt": "995₽ / 1 шт.", "c": ""}, {"k": "tg-24581-0", "lot": 207, "sec": "ware", "cat": "Чабани", "name": "Чабань, 30×14 см (тёмное дерево, прямоугольная)", "price": 995, "pt": "995₽ / 1 шт.", "c": ""}, {"k": "tg-24582-0", "lot": 208, "sec": "ware", "cat": "Чабани", "name": "Ху Чэн (подставка под чайник или гайвань), d 14 см (зелёный мох)", "price": 795, "pt": "795₽ / 1 шт.", "c": ""}, {"k": "tg-24583-0", "lot": 209, "sec": "ware", "cat": "Чабани", "name": "Чабань, камень, d 18 см (золотая решётка)", "price": 1295, "pt": "1295₽ / 1 шт.", "c": ""}, {"k": "tg-24584-0", "lot": 210, "sec": "ware", "cat": "Чабани", "name": "Чабань, камне-пластик, d 30 см (волны, золотая решётка)", "price": 1795, "pt": "1795₽ / 1 шт.", "c": ""}, {"k": "tg-24585-0", "lot": 211, "sec": "ware", "cat": "Чабани", "name": "Чабань, камень, 28×28 см (золотая решётка)", "price": 1495, "pt": "1495₽ / 1 шт.", "c": ""}, {"k": "tg-24586-0", "lot": 212, "sec": "ware", "cat": "Чабани", "name": "Чабань, камень, 32×18 см (золотая решётка с карпами)", "price": 1295, "pt": "1295₽ / 1 шт.", "c": ""}, {"k": "tg-24587-0", "lot": 213, "sec": "ware", "cat": "Чабани", "name": "Чабань, камень, 43×20×5 см (деревянная рама)", "price": 4495, "pt": "4495₽ / 1 шт.", "c": ""}, {"k": "tg-24588-0", "lot": 214, "sec": "ware", "cat": "Чабани", "name": "Чабань, 60×28 см (дерево)", "price": 4995, "pt": "4995₽ / 1 шт.", "c": ""}, {"k": "tg-24589-0", "lot": 215, "sec": "ware", "cat": "Пиалы", "name": "Набор пиал, 8 шт. по 50 мл (роспись и каллиграфия, в коробке)", "price": 595, "pt": "595₽ / 1 набор", "c": ""}, {"k": "tg-24608-0", "lot": 218, "sec": "ware", "cat": "Пиалы", "name": "Пиала, серебряное напыление, 100 мл (феникс и пагода)", "price": 1295, "pt": "1295₽ / 1 шт.", "c": ""}, {"k": "tg-24619-0", "lot": 228, "sec": "ware", "cat": "Гайвани", "name": "Гайвань, фарфор Дэхуа, 150 мл (белая)", "price": 795, "pt": "795₽ / 1 шт.", "c": ""}, {"k": "tg-25045-0", "lot": 316, "sec": "tea", "cat": "Габа улун", "name": "Габа Мао Ча №1 Ver.2", "price": 795, "pt": "795₽ / 100 г", "c": "Тёплый виноградный сок, послевкусие свердловского кекса с изюмом. С проливами вкус только усиливается. Даже такие чаеманы как мы, как будто впервые почувствовали снова эффект от габы, очень мощная. На четвёртый пролив во вкусе пошли печеньки-рыбки."}, {"k": "tg-25046-0", "lot": 317, "sec": "tea", "cat": "Габа улун", "name": "Габа Яньсюнь №1", "price": 1295, "pt": "1295₽ / 100 г", "c": "Супер копчёная, терпух из коптильни, в приятном понимании, абсолютно уникальная вещь, берите немного, но обязательно всем попробовать. На поздних проливах больше раскрывается вкус габы."}, {"k": "tg-25047-0", "lot": 319, "sec": "tea", "cat": "Габа улун", "name": "Габа Мао Ча №3 Ver.2", "price": 1295, "pt": "1295₽ / 100 г", "c": "Очень яркая и супер понятная, медовая, кисло-сладкая, яблочная, чисто наш вайб, много мёда на послевкусие. На 4 пролив пошли мармеладки фруктовые."}, {"k": "tg-25048-0", "lot": 320, "sec": "tea", "cat": "Габа улун", "name": "Габа Яньсюнь №2", "price": 1195, "pt": "1195₽ / 100 г", "c": "Минимальная дымность, сладко-табачная на первом проливе, на втором проливе сладко-кондитерская."}, {"k": "tg-25049-0", "lot": 321, "sec": "tea", "cat": "Габа улун", "name": "Габа улун", "price": 995, "pt": "995₽ / 100 г", "c": "Сладкая, печенье юбилейное молочное (Стас). Пряник (Иван). Насыщенная, на 3 проливе кислинка травянистая. Играет на проливах."}, {"k": "tg-25050-0", "lot": 322, "sec": "tea", "cat": "Габа улун", "name": "Габа улун №2", "price": 1295, "pt": "1295₽ / 100 г", "c": "Йогурт маракуйя. Дыня, банан, сливочная, топчик."}, {"k": "tg-25051-0", "lot": 323, "sec": "tea", "cat": "Габа улун", "name": "Хуан Цзинь Гуй Мао Ча", "price": 1595, "pt": "1595₽ / 100 г", "c": "Очень насыщенный, очень дорогие дескрипторы: персик, мякоть яблока, пастила, сливочность, маракуйя, очень-очень-очень жирно. От крышки пахнет цветком, уникально."}, {"k": "tg-25278-0", "lot": 324, "sec": "tea", "cat": "Шу пуэр", "name": "Шу пуэр Е Чэн Е Сян 2018 г.", "price": 1395, "pt": "1395₽ / 357 г", "c": "1 пролив не совсем поняли. Но на 2–3 пролив чай раскрылся так же, как раскрываются неплохие классические шоколадные конфеты. Игривый вкус! Нравится!"}, {"k": "tg-25279-0", "lot": 325, "sec": "tea", "cat": "Шэн пуэр", "name": "Шэн Булан Шэн Тай Цяо Му 2018 г.", "price": 1395, "pt": "1395₽ / 357 г", "c": "Есть молодецкие выходки, но сама палитра благородна, вайб терпковатого горячего морса из смородины. На 2–3 пролив становится более воспитанным, немного медовым, хорошо!"}, {"k": "tg-25280-0", "lot": 326, "sec": "tea", "cat": "Шу пуэр", "name": "Шу Бань Чжан Гун Тин 2018 г.", "price": 1595, "pt": "1595₽ / 357 г", "c": "Печенье, орехи, хорошо! Вкусно! Что-то шершаво ирисковое, нежное, насыщенное, плотное."}, {"k": "tg-25281-0", "lot": 327, "sec": "tea", "cat": "Шэн пуэр", "name": "Шэн Си Гуэй 2024 г.", "price": 1395, "pt": "1395₽ / 357 г", "c": "Чересчур дерзок в силу юности, что круто, он не бьёт дёгтярной терпкостью, а просто вкус мягкой горечи. На 3–4 пролив успокаивается. Злой эффект."}, {"k": "tg-25282-0", "lot": 328, "sec": "tea", "cat": "Шу пуэр", "name": "Шу Бин Дао Лао Шу 2018 г.", "price": 1295, "pt": "1295₽ / 357 г", "c": "Неплохо, сладко, немного молочного шоколада, вполне. Немного ягод на 2–3 пролив. Крупнолистовой, мягкий, не сильно нефтяной. Маслянистый, сочный, прямо на губах маслянистость, Игорь так же это подметил. Питкий!"}, {"k": "tg-25283-0", "lot": 329, "sec": "tea", "cat": "Шэн пуэр", "name": "Шэн Булан 2018 г.", "price": 1595, "pt": "1595₽ / 357 г", "c": "Горячие ириски! Причём сверх очевидные, насыщенные, тупо да! Очень понравился. Очень благородно сластит!"}, {"k": "tg-25284-0", "lot": 330, "sec": "tea", "cat": "Шэн пуэр", "name": "Шэн Лао Бань Чжан 2019 г.", "price": 1295, "pt": "1295₽ / 357 г", "c": "Фабрика «Хун Линь Гу» Мэнхай. Клюква, приятный, немного яблока, хорошие ноты. На 2–3 пролив и немного мёда, пастилы, груши — хорошо!"}, {"k": "tg-25285-0", "lot": 331, "sec": "tea", "cat": "Шу пуэр", "name": "Шу Лао Бань Чжан 2018 г.", "price": 1295, "pt": "1295₽ / 357 г", "c": "Ничё такая, вкус текстурный, немного карамели, немного сласти, хорош!"}, {"k": "tg-25286-0", "lot": 332, "sec": "ware", "cat": "Чабани", "name": "Чабань, 60×40 см", "price": 3495, "pt": "3495₽ / 1 шт.", "c": ""}, {"k": "tg-25287-0", "lot": 333, "sec": "ware", "cat": "Чабани", "name": "Чабань, 18×28 см", "price": 1595, "pt": "1595₽ / 1 шт.", "c": ""}, {"k": "tg-25288-0", "lot": 334, "sec": "ware", "cat": "Чабани", "name": "Чабань, 46×29 см", "price": 2995, "pt": "2995₽ / 1 шт.", "c": ""}, {"k": "tg-25289-0", "lot": 335, "sec": "ware", "cat": "Чабани", "name": "Чабань, 49×32 см", "price": 3595, "pt": "3595₽ / 1 шт.", "c": ""}, {"k": "tg-25290-0", "lot": 336, "sec": "ware", "cat": "Чабани", "name": "Чабань, d 38 см (круглая)", "price": 2595, "pt": "2595₽ / 1 шт.", "c": ""}, {"k": "tg-25291-0", "lot": 337, "sec": "ware", "cat": "Чабани", "name": "Чабань, 58×35 см", "price": 3695, "pt": "3695₽ / 1 шт.", "c": ""}, {"k": "tg-25292-0", "lot": 338, "sec": "ware", "cat": "Чабани", "name": "Чабань, 59×37 см", "price": 4495, "pt": "4495₽ / 1 шт.", "c": ""}, {"k": "tg-25293-0", "lot": 339, "sec": "ware", "cat": "Чабани", "name": "Чабань, 38×26 см", "price": 2295, "pt": "2295₽ / 1 шт.", "c": ""}, {"k": "tg-25294-0", "lot": 340, "sec": "ware", "cat": "Чабани", "name": "Чабань, 35×23 см", "price": 1995, "pt": "1995₽ / 1 шт.", "c": ""}];
+const $ = s => document.querySelector(s);
+const rub = n => n.toLocaleString('ru-RU') + ' ₽';
+const img = r => '../../photos/' + r.k + '.jpg';
+const state = {};
+let sec = 'tea', cat = '', q = '';
+
+// счётчики на первом экране — бегут от нуля
+function countUp(el, to){
+  const t0 = performance.now(), d = 1400;
+  (function step(t){ const p = Math.min(1, (t - t0) / d), e = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(to * e); if(p < 1) requestAnimationFrame(step); })(t0);
+}
+setTimeout(() => {
+  countUp($('#nTea'), LOTS.filter(r => r.sec === 'tea').length);
+  countUp($('#nWare'), LOTS.filter(r => r.sec === 'ware').length);
+}, 800);
+
+// панель появляется, когда ушли с первого экрана
+new IntersectionObserver(([e]) => $('#nav').classList.toggle('show', !e.isIntersecting), {threshold:.15})
+  .observe(document.querySelector('.hero'));
+
+const reveal = new IntersectionObserver(es => es.forEach(e => {
+  if(e.isIntersecting){ e.target.classList.add('vis'); reveal.unobserve(e.target); }
+}), {rootMargin:'0px 0px -8% 0px'});
+
+function renderCats(){
+  const counts = {};
+  LOTS.filter(r => r.sec === sec).forEach(r => counts[r.cat] = (counts[r.cat] || 0) + 1);
+  const all = Object.values(counts).reduce((a, b) => a + b, 0);
+  $('#cats').innerHTML = [['', 'Всё', all], ...Object.entries(counts).map(([c, n]) => [c, c, n])]
+    .map(([v, t, n]) => `<button type="button" data-cat="${v}" class="${v === cat ? 'on' : ''}">${t}<sup>${n}</sup></button>`).join('');
+}
+
+function rowHtml(r){
+  const s = state[r.k];
+  const act = s ? `<div class="qty"><button type="button" data-d="-1" aria-label="Меньше">−</button><b>${s}</b><button type="button" data-d="1" aria-label="Больше">+</button></div>`
+                : `<button type="button" class="add"><span>В заказ</span></button>`;
+  return `<li class="row${s ? ' on' : ''}" data-k="${r.k}">
+    <div class="lot">${r.lot}</div>
+    <button type="button" class="thumb" aria-label="Фото лота ${r.lot}"><img src="${img(r)}" alt="" loading="lazy"></button>
+    <div class="info"><div class="cat">${r.cat}</div><h3>${r.name}</h3>${r.c ? `<p>«${r.c}»</p>` : ''}</div>
+    <div class="price"><b>${rub(r.price)}</b><span>${r.pt.split('/')[1] || ''}</span></div>
+    <div class="act">${act}</div></li>`;
+}
+
+function rows(){
+  const w = q.toLowerCase();
+  return LOTS.filter(r => r.sec === sec && (!cat || r.cat === cat) &&
+    (!w || (r.name + ' ' + r.c + ' ' + r.lot).toLowerCase().includes(w)));
+}
+
+function renderList(animate){
+  const list = $('#list');
+  const draw = () => {
+    const rs = rows();
+    list.innerHTML = rs.length ? rs.map(rowHtml).join('') : '<li class="empty">Ничего не нашлось</li>';
+    list.querySelectorAll('.row').forEach((el, i) => { el.style.transitionDelay = Math.min(i, 8) * 45 + 'ms'; reveal.observe(el); });
+    list.classList.remove('fading');
+  };
+  if(!animate) return draw();
+  list.classList.add('fading');
+  setTimeout(draw, 300);
+}
+
+function updateRow(k){
+  const el = document.querySelector(`.row[data-k="${k}"]`);
+  if(!el) return;
+  const r = LOTS.find(x => x.k === k);
+  const tmp = document.createElement('ul'); tmp.innerHTML = rowHtml(r);
+  const nw = tmp.firstElementChild; nw.classList.add('vis'); el.replaceWith(nw);
+}
+
+function totals(bump){
+  const ks = Object.keys(state);
+  const sum = ks.reduce((a, k) => a + LOTS.find(r => r.k === k).price * state[k], 0);
+  $('#sum').textContent = rub(sum); $('#total').textContent = rub(sum); $('#cnt').textContent = ks.length;
+  if(bump){ const b = $('#cartBtn'); b.classList.remove('bump'); void b.offsetWidth; b.classList.add('bump'); }
+  $('#drList').innerHTML = ks.length ? ks.map(k => { const r = LOTS.find(x => x.k === k);
+    return `<div class="ci"><img src="${img(r)}" alt=""><div><b>${r.name}</b><small>Лот ${r.lot} · ${state[k]} × ${rub(r.price)}</small></div><div class="s">${rub(r.price * state[k])}</div></div>`; }).join('')
+    : '<div class="dr-empty">Пока ничего не выбрано</div>';
+  $('#drList').querySelectorAll('.ci').forEach((el, i) => el.style.transitionDelay = 150 + i * 60 + 'ms');
+}
+
+// точка летит дугой от кнопки к корзине
+function fly(from){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const a = from.getBoundingClientRect(), b = $('#cartBtn').getBoundingClientRect();
+  const x0 = a.left + a.width / 2, y0 = a.top + a.height / 2, x1 = b.right - 25, y1 = b.top + b.height / 2;
+  const d = document.createElement('div'); d.className = 'dot'; document.body.appendChild(d);
+  const frames = []; for(let i = 0; i <= 20; i++){ const t = i / 20;
+    frames.push({transform:`translate(${x0 + (x1 - x0) * t}px, ${y0 + (y1 - y0) * t - Math.sin(Math.PI * t) * 160}px) scale(${1 - t * .5})`}); }
+  d.animate(frames, {duration:750, easing:'cubic-bezier(.5,0,.3,1)'}).onfinish = () => { d.remove(); totals(true); };
+}
+
+$('#list').addEventListener('click', e => {
+  const row = e.target.closest('.row'); if(!row) return;
+  const k = row.dataset.k;
+  if(e.target.closest('.thumb')) return openLb(e.target.closest('.thumb'), LOTS.find(r => r.k === k));
+  if(e.target.closest('.add')){ state[k] = 1; const btn = e.target.closest('.add'); fly(btn); updateRow(k); return; }
+  const d = e.target.closest('[data-d]');
+  if(d){ state[k] = (state[k] || 0) + +d.dataset.d; if(state[k] <= 0) delete state[k]; updateRow(k); totals(true); }
+});
+
+$('#cats').addEventListener('click', e => {
+  const b = e.target.closest('button'); if(!b) return;
+  cat = b.dataset.cat; renderCats(); renderList(true);
+});
+
+$('#seg').addEventListener('click', e => {
+  const b = e.target.closest('button'); if(!b || b.dataset.sec === sec) return;
+  sec = b.dataset.sec; cat = '';
+  $('#seg').dataset.i = sec === 'tea' ? 0 : 1;
+  $('#seg').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
+  const t = $('#secTitle'); t.classList.add('out');
+  setTimeout(() => { t.firstElementChild.textContent = sec === 'tea' ? 'Чай' : 'Посуда'; t.classList.replace('out', 'in');
+    requestAnimationFrame(() => requestAnimationFrame(() => t.classList.remove('in'))); }, 450);
+  renderCats(); renderList(true);
+  document.getElementById('catalog').scrollIntoView({behavior:'smooth'});
+});
+
+let qt; $('#q').addEventListener('input', e => { clearTimeout(qt); qt = setTimeout(() => { q = e.target.value.trim(); renderList(true); }, 200); });
+
+// фото плывёт за курсором с небольшой инерцией
+const fl = $('#float'), flImg = fl.querySelector('img');
+let mx = 0, my = 0, fx = 0, fy = 0, cur = null;
+addEventListener('mousemove', e => { mx = e.clientX + 170; my = e.clientY; });
+(function loop(){ fx += (mx - fx) * .14; fy += (my - fy) * .14; fl.style.left = fx + 'px'; fl.style.top = fy + 'px'; requestAnimationFrame(loop); })();
+$('#list').addEventListener('mouseover', e => {
+  const row = e.target.closest('.row');
+  if(!row || e.target.closest('.act')){ fl.classList.remove('on'); cur = null; return; }
+  if(row.dataset.k !== cur){ cur = row.dataset.k; flImg.src = '../../photos/' + cur + '.jpg'; }
+  fl.classList.add('on');
+});
+$('#list').addEventListener('mouseleave', () => { fl.classList.remove('on'); cur = null; });
+
+// крупное фото раскрывается из миниатюры
+const lb = $('#lb'), lbImg = lb.querySelector('img');
+function openLb(th, r){
+  fl.classList.remove('on');
+  lbImg.src = img(r); lb.classList.add('on');
+  const a = th.getBoundingClientRect();
+  lbImg.onload = null;
+  requestAnimationFrame(() => {
+    const b = lbImg.getBoundingClientRect();
+    lbImg.animate([{transform:`translate(${a.left - b.left}px, ${a.top - b.top}px) scale(${a.width / b.width}, ${a.height / b.height})`, transformOrigin:'0 0', borderRadius:'30px'},
+                   {transform:'none', transformOrigin:'0 0', borderRadius:'8px'}], {duration:550, easing:'cubic-bezier(.2,.7,.1,1)'});
+  });
+}
+lb.addEventListener('click', () => lb.classList.remove('on'));
+
+const openCart = v => document.body.classList.toggle('cart-open', v);
+$('#cartBtn').addEventListener('click', () => openCart(true));
+$('#close').addEventListener('click', () => openCart(false));
+$('#veil').addEventListener('click', () => openCart(false));
+addEventListener('keydown', e => { if(e.key === 'Escape'){ openCart(false); lb.classList.remove('on'); } });
+
+renderCats(); renderList(false); totals(false);
+</script>
+</body>
+</html>
