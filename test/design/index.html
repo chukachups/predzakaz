@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex"><title>Макеты дизайна</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&amp;family=Golos+Text:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&amp;family=Golos+Text:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>#v0 a{color:#4a6741}a:hover{color:#2f4529}</style>
+<style>#v1 a{color:#d4b06a}a:hover{color:#e8cc8e}
+#v1 input::placeholder{color:#7d8a7f}</style>
+<style>#v2 a{color:#1f6b43}a:hover{color:#15502f}
+#v2 input::placeholder{color:#7b827c}</style>
+<style>
+body{margin:0;background:#cfd3cc}
+.tabs{position:sticky;top:0;z-index:10;display:flex;gap:6px;overflow-x:auto;padding:8px;background:#222;font-family:system-ui,sans-serif}
+.tabs button{flex:0 0 auto;height:40px;padding:0 14px;border:none;border-radius:10px;background:#3a3a3a;color:#eee;font-size:14px;font-weight:600}
+.tabs button.on{background:#fff;color:#111}
+.v input{min-width:0}
+</style></head><body>
+<nav class="tabs"><button type="button" data-i="0" class="on">1 · Чайная церемония</button><button type="button" data-i="1">2 · Тёмный премиум</button><button type="button" data-i="2">3 · Современный магазин</button></nav>
+<div class="v" id="v0"><div style="width: 100%; max-width: 430px; margin: 0 auto; min-height: 100vh; position: relative; padding-bottom: 14px; box-sizing: border-box; background: #f4eee1; color: #2a2419; font-family: 'Manrope', sans-serif;">
+
+  <header style="padding: 34px 24px 26px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; border-bottom: 1px solid #d9cdb4;">
+    <img src="logo.png" alt="Логотип" style="height: 64px; width: auto; filter: brightness(0.35) sepia(0.4);">
+    <div style="display: flex; align-items: center; gap: 12px; color: #9e3b2c;">
+      <span style="width: 34px; height: 1px; background: #b9a57c;"></span>
+      <span style="font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 600;">Айро чай · 2026</span>
+      <span style="width: 34px; height: 1px; background: #b9a57c;"></span>
+    </div>
+    <h1 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 44px; line-height: 1; letter-spacing: 0.5px;">Предзаказ чая</h1>
+    <p style="margin: 0; font-size: 13px; line-height: 1.55; color: #6b5f4b; max-width: 300px;">Цена указана розничная, без скидок и опта. Отметьте понравившийся товар и выберите количество.</p>
+  </header>
+
+  <section style="padding: 20px 20px 6px; display: flex; flex-direction: column; gap: 14px;">
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: 1px solid #2a2419; border-radius: 999px; padding: 3px;">
+      <button type="button" style="height: 44px; border: none; border-radius: 999px; background: #2a2419; color: #f4eee1; font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600;">Чай</button>
+      <button type="button" style="height: 44px; border: none; border-radius: 999px; background: transparent; color: #2a2419; font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600;">Посуда</button>
+    </div>
+    <label style="display: flex; align-items: center; gap: 10px; height: 46px; padding: 0 14px; border-bottom: 1px solid #b9a57c;">
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8a7b60" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+      <input type="search" placeholder="Поиск по названию или вкусу" style="flex: 1; border: none; background: transparent; font-family: inherit; font-size: 16px; color: #2a2419; outline: none;">
+    </label>
+    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+      <button type="button" style="height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid #4a6741; background: #4a6741; color: #fff; font-family: inherit; font-size: 13px; font-weight: 600;">Все виды</button>
+      <button type="button" style="height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid #c7b893; background: transparent; color: #2a2419; font-family: inherit; font-size: 13px;">Шэн пуэр</button>
+      <button type="button" style="height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid #c7b893; background: transparent; color: #2a2419; font-family: inherit; font-size: 13px;">Шу пуэр</button>
+      <button type="button" style="height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid #c7b893; background: transparent; color: #2a2419; font-family: inherit; font-size: 13px;">Габа улун</button>
+    </div>
+  </section>
+
+  <div style="padding: 14px 20px 0; display: flex; flex-direction: column; gap: 0;">
+
+    <article style="display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 16px; padding: 20px 0; border-top: 1px solid #d9cdb4;">
+      <div style="position: relative;">
+        <img src="../../photos/tg-25283-0.jpg" alt="Лот 329" style="width: 96px; height: 144px; object-fit: cover; border-radius: 4px; display: block; box-shadow: 0 0 0 4px #f4eee1, 0 0 0 5px #4a6741;">
+        <span style="position: absolute; top: -8px; left: -8px; width: 40px; height: 40px; border-radius: 6px; background: #9e3b2c; color: #f9efe0; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 17px; transform: rotate(-6deg);">329</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 7px; min-width: 0;">
+        <div style="font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase; color: #4a6741; font-weight: 700;">Шэн пуэр · 357 г</div>
+        <h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 23px; line-height: 1.1; font-weight: 600;">Шэн Булан 2018 г.</h2>
+        <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16px; line-height: 1.35; color: #5c5040;">«Горячие ириски! Причём сверх очевидные, насыщенные. Очень благородно сластит!»</p>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 4px;">
+          <span style="font-size: 18px; font-weight: 700;">1 595 ₽</span>
+          <div style="display: flex; align-items: center; border: 1px solid #4a6741; border-radius: 999px;">
+            <button type="button" aria-label="Меньше" style="width: 40px; height: 40px; border: none; background: transparent; color: #4a6741; font-size: 20px;">−</button>
+            <span style="min-width: 18px; text-align: center; font-weight: 700;">1</span>
+            <button type="button" aria-label="Больше" style="width: 40px; height: 40px; border: none; background: transparent; color: #4a6741; font-size: 20px;">+</button>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article style="display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 16px; padding: 20px 0; border-top: 1px solid #d9cdb4;">
+      <div style="position: relative;">
+        <img src="../../photos/tg-25280-0.jpg" alt="Лот 326" style="width: 96px; height: 144px; object-fit: cover; border-radius: 4px; display: block;">
+        <span style="position: absolute; top: -8px; left: -8px; width: 40px; height: 40px; border-radius: 6px; border: 1.5px solid #9e3b2c; background: #f4eee1; color: #9e3b2c; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 17px; transform: rotate(-6deg); box-sizing: border-box;">326</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 7px; min-width: 0;">
+        <div style="font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase; color: #4a6741; font-weight: 700;">Шу пуэр · 357 г</div>
+        <h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 23px; line-height: 1.1; font-weight: 600;">Шу Бань Чжан Гун Тин 2018 г.</h2>
+        <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16px; line-height: 1.35; color: #5c5040;">«Печенье, орехи, хорошо! Что-то шершаво ирисковое, нежное, плотное.»</p>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 4px;">
+          <span style="font-size: 18px; font-weight: 700;">1 595 ₽</span>
+          <button type="button" style="height: 40px; padding: 0 18px; border-radius: 999px; border: 1px solid #2a2419; background: transparent; color: #2a2419; font-family: inherit; font-size: 13px; font-weight: 600;">В заказ</button>
+        </div>
+      </div>
+    </article>
+
+    <article style="display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 16px; padding: 20px 0; border-top: 1px solid #d9cdb4;">
+      <div style="position: relative;">
+        <img src="../../photos/tg-25292-0.jpg" alt="Лот 338" style="width: 96px; height: 144px; object-fit: cover; border-radius: 4px; display: block;">
+        <span style="position: absolute; top: -8px; left: -8px; width: 40px; height: 40px; border-radius: 6px; border: 1.5px solid #9e3b2c; background: #f4eee1; color: #9e3b2c; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 17px; transform: rotate(-6deg); box-sizing: border-box;">338</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 7px; min-width: 0;">
+        <div style="font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase; color: #4a6741; font-weight: 700;">Посуда · чабань</div>
+        <h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 23px; line-height: 1.1; font-weight: 600;">Чабань, 59×37 см</h2>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 4px;">
+          <span style="font-size: 18px; font-weight: 700;">4 495 ₽</span>
+          <button type="button" style="height: 40px; padding: 0 18px; border-radius: 999px; border: 1px solid #2a2419; background: transparent; color: #2a2419; font-family: inherit; font-size: 13px; font-weight: 600;">В заказ</button>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <div style="position: sticky; margin: 28px 12px 0; bottom: 14px; height: 64px; border-radius: 16px; background: #2a2419; color: #f4eee1; display: flex; align-items: center; gap: 12px; padding: 0 10px 0 18px; box-shadow: 0 10px 30px rgba(42,36,25,.35);">
+    <div style="display: flex; flex-direction: column; gap: 2px; flex: 1;">
+      <span style="font-size: 11px; letter-spacing: 1px; text-transform: uppercase; opacity: .7;">1 лот</span>
+      <span style="font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 700; line-height: 1;">1 595 ₽</span>
+    </div>
+    <button type="button" style="height: 46px; padding: 0 22px; border: none; border-radius: 12px; background: #9e3b2c; color: #fff; font-family: inherit; font-size: 14px; font-weight: 700;">Корзина</button>
+  </div>
+</div></div>
+<div class="v" id="v1" hidden><div style="width: 100%; max-width: 430px; margin: 0 auto; min-height: 100vh; position: relative; padding-bottom: 14px; box-sizing: border-box; background: #0e1611; color: #ece5d3; font-family: 'Golos Text', sans-serif;">
+
+  <header style="position: relative; padding: 40px 24px 30px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center;">
+    <div style="width: 92px; height: 92px; border-radius: 50%; border: 1px solid #6e5a30; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 6px #0e1611, 0 0 0 7px #2c3a2f;">
+      <img src="logo.png" alt="Логотип" style="width: 68px; height: auto;">
+    </div>
+    <h1 style="margin: 4px 0 0; font-family: 'Playfair Display', serif; font-weight: 600; font-size: 38px; line-height: 1.05; color: #f3ead3;">Предзаказ <span style="font-style: italic; color: #d4b06a;">чая</span></h1>
+    <div style="width: 48px; height: 1px; background: #d4b06a;"></div>
+    <p style="margin: 0; font-size: 13px; line-height: 1.6; color: #a9b3a8; max-width: 300px;">Цена указана розничная, без скидок и опта. Отметьте понравившийся товар и выберите количество.</p>
+  </header>
+
+  <section style="padding: 0 18px 8px; display: flex; flex-direction: column; gap: 12px;">
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; background: #17221b; border-radius: 14px; padding: 5px;">
+      <button type="button" style="height: 44px; border: none; border-radius: 10px; background: #d4b06a; color: #14100a; font-family: inherit; font-size: 15px; font-weight: 700;">Чай</button>
+      <button type="button" style="height: 44px; border: none; border-radius: 10px; background: transparent; color: #c9cfc6; font-family: inherit; font-size: 15px; font-weight: 600;">Посуда</button>
+    </div>
+    <label style="display: flex; align-items: center; gap: 10px; height: 48px; padding: 0 16px; border-radius: 14px; background: #17221b; border: 1px solid #253328;">
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d4b06a" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+      <input type="search" placeholder="Поиск по названию или вкусу" style="flex: 1; border: none; background: transparent; font-family: inherit; font-size: 16px; color: #ece5d3; outline: none;">
+    </label>
+    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+      <button type="button" style="height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid #d4b06a; background: rgba(212,176,106,.14); color: #e8cc8e; font-family: inherit; font-size: 13px; font-weight: 600;">Все виды</button>
+      <button type="button" style="height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid #2c3a2f; background: transparent; color: #c9cfc6; font-family: inherit; font-size: 13px;">Шэн пуэр</button>
+      <button type="button" style="height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid #2c3a2f; background: transparent; color: #c9cfc6; font-family: inherit; font-size: 13px;">Шу пуэр</button>
+      <button type="button" style="height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid #2c3a2f; background: transparent; color: #c9cfc6; font-family: inherit; font-size: 13px;">Габа улун</button>
+    </div>
+  </section>
+
+  <div style="padding: 12px 18px 0; display: flex; flex-direction: column; gap: 14px;">
+
+    <article style="display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 14px; padding: 12px; border-radius: 18px; background: linear-gradient(180deg, #1c2a20, #17221b); border: 1px solid #d4b06a; box-shadow: 0 8px 28px rgba(212,176,106,.12);">
+      <div style="position: relative;">
+        <img src="../../photos/tg-25283-0.jpg" alt="Лот 329" style="width: 104px; height: 150px; object-fit: cover; border-radius: 12px; display: block;">
+        <span style="position: absolute; left: 6px; bottom: 6px; padding: 3px 8px; border-radius: 6px; background: rgba(14,22,17,.85); color: #e8cc8e; font-size: 12px; font-weight: 700;">№ 329</span>
+        <span style="position: absolute; right: -6px; top: -6px; width: 26px; height: 26px; border-radius: 50%; background: #d4b06a; color: #14100a; display: flex; align-items: center; justify-content: center;">
+          <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"></path></svg>
+        </span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px; min-width: 0;">
+        <div style="font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: #d4b06a; font-weight: 600;">Шэн пуэр · 357 г</div>
+        <h2 style="margin: 0; font-family: 'Playfair Display', serif; font-size: 20px; line-height: 1.15; font-weight: 600; color: #f3ead3;">Шэн Булан 2018 г.</h2>
+        <p style="margin: 0; font-size: 13px; line-height: 1.45; color: #a9b3a8;">Горячие ириски! Причём сверх очевидные, насыщенные. Очень благородно сластит!</p>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-top: auto;">
+          <span style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #e8cc8e;">1 595 ₽</span>
+          <div style="display: flex; align-items: center; gap: 2px; background: #0e1611; border-radius: 10px;">
+            <button type="button" aria-label="Меньше" style="width: 36px; height: 36px; border: none; background: transparent; color: #e8cc8e; font-size: 18px;">−</button>
+            <span style="min-width: 14px; text-align: center; font-weight: 700;">1</span>
+            <button type="button" aria-label="Больше" style="width: 36px; height: 36px; border: none; background: transparent; color: #e8cc8e; font-size: 18px;">+</button>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article style="display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 14px; padding: 12px; border-radius: 18px; background: #17221b; border: 1px solid #253328;">
+      <div style="position: relative;">
+        <img src="../../photos/tg-25280-0.jpg" alt="Лот 326" style="width: 104px; height: 150px; object-fit: cover; border-radius: 12px; display: block;">
+        <span style="position: absolute; left: 6px; bottom: 6px; padding: 3px 8px; border-radius: 6px; background: rgba(14,22,17,.85); color: #e8cc8e; font-size: 12px; font-weight: 700;">№ 326</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px; min-width: 0;">
+        <div style="font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: #d4b06a; font-weight: 600;">Шу пуэр · 357 г</div>
+        <h2 style="margin: 0; font-family: 'Playfair Display', serif; font-size: 20px; line-height: 1.15; font-weight: 600; color: #f3ead3;">Шу Бань Чжан Гун Тин 2018 г.</h2>
+        <p style="margin: 0; font-size: 13px; line-height: 1.45; color: #a9b3a8;">Печенье, орехи, хорошо! Что-то шершаво ирисковое, нежное, плотное.</p>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-top: auto;">
+          <span style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #e8cc8e;">1 595 ₽</span>
+          <button type="button" style="height: 36px; padding: 0 14px; border-radius: 10px; border: 1px solid #d4b06a; background: transparent; color: #e8cc8e; font-family: inherit; font-size: 13px; font-weight: 600;">Добавить</button>
+        </div>
+      </div>
+    </article>
+
+    <article style="display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 14px; padding: 12px; border-radius: 18px; background: #17221b; border: 1px solid #253328;">
+      <div style="position: relative;">
+        <img src="../../photos/tg-25292-0.jpg" alt="Лот 338" style="width: 104px; height: 150px; object-fit: cover; border-radius: 12px; display: block;">
+        <span style="position: absolute; left: 6px; bottom: 6px; padding: 3px 8px; border-radius: 6px; background: rgba(14,22,17,.85); color: #e8cc8e; font-size: 12px; font-weight: 700;">№ 338</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px; min-width: 0;">
+        <div style="font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: #d4b06a; font-weight: 600;">Посуда · чабань</div>
+        <h2 style="margin: 0; font-family: 'Playfair Display', serif; font-size: 20px; line-height: 1.15; font-weight: 600; color: #f3ead3;">Чабань, 59×37 см</h2>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-top: auto;">
+          <span style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #e8cc8e;">4 495 ₽</span>
+          <button type="button" style="height: 36px; padding: 0 14px; border-radius: 10px; border: 1px solid #d4b06a; background: transparent; color: #e8cc8e; font-family: inherit; font-size: 13px; font-weight: 600;">Добавить</button>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <div style="position: sticky; margin: 28px 12px 0; bottom: 14px; height: 66px; border-radius: 18px; background: rgba(23,34,27,.92); border: 1px solid #3a4a3d; color: #ece5d3; display: flex; align-items: center; gap: 12px; padding: 0 10px 0 18px; box-shadow: 0 12px 34px rgba(0,0,0,.5);">
+    <div style="display: flex; flex-direction: column; gap: 2px; flex: 1;">
+      <span style="font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: #a9b3a8;">1 лот</span>
+      <span style="font-family: 'Playfair Display', serif; font-size: 23px; font-weight: 700; line-height: 1; color: #e8cc8e;">1 595 ₽</span>
+    </div>
+    <button type="button" style="height: 46px; padding: 0 22px; border: none; border-radius: 12px; background: #d4b06a; color: #14100a; font-family: inherit; font-size: 14px; font-weight: 700;">Корзина</button>
+  </div>
+</div></div>
+<div class="v" id="v2" hidden><div style="width: 100%; max-width: 430px; margin: 0 auto; min-height: 100vh; position: relative; padding-bottom: 14px; box-sizing: border-box; background: #f1f3ee; color: #18201a; font-family: 'Golos Text', sans-serif;">
+
+  <header style="margin: 12px 12px 0; padding: 22px 20px 22px; border-radius: 26px; background: #1f6b43; color: #fff; display: flex; flex-direction: column; gap: 14px;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <div style="width: 52px; height: 52px; border-radius: 16px; background: rgba(255,255,255,.14); display: flex; align-items: center; justify-content: center;">
+        <img src="logo.png" alt="Логотип" style="width: 40px; height: auto;">
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 12px; color: #cfe5d6; font-weight: 500;">Айро чай</span>
+        <span style="font-family: 'Unbounded', sans-serif; font-size: 13px; font-weight: 600; background: #f2c14e; color: #1b1606; border-radius: 999px; padding: 3px 10px; align-self: flex-start;">Новые лоты 324–340</span>
+      </div>
+    </div>
+    <h1 style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 30px; line-height: 1.05; letter-spacing: -0.5px;">Предзаказ чая</h1>
+    <p style="margin: 0; font-size: 13.5px; line-height: 1.5; color: #dcebe1;">Цена указана розничная, без скидок и опта. Отметьте понравившийся товар и выберите количество.</p>
+  </header>
+
+  <section style="padding: 14px 12px 4px; display: flex; flex-direction: column; gap: 10px;">
+    <div style="display: flex; gap: 8px;">
+      <label style="flex: 1; display: flex; align-items: center; gap: 10px; height: 48px; padding: 0 16px; border-radius: 16px; background: #fff; box-shadow: 0 1px 2px rgba(24,32,26,.06);">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5b665e" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+        <input type="search" placeholder="Найти чай" style="flex: 1; min-width: 0; border: none; background: transparent; font-family: inherit; font-size: 16px; color: #18201a; outline: none;">
+      </label>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); background: #fff; border-radius: 16px; padding: 4px; width: 168px; box-sizing: border-box; box-shadow: 0 1px 2px rgba(24,32,26,.06);">
+        <button type="button" style="height: 40px; border: none; border-radius: 12px; background: #18201a; color: #fff; font-family: inherit; font-size: 14px; font-weight: 600;">Чай</button>
+        <button type="button" style="height: 40px; border: none; border-radius: 12px; background: transparent; color: #18201a; font-family: inherit; font-size: 14px; font-weight: 600;">Посуда</button>
+      </div>
+    </div>
+    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+      <button type="button" style="height: 36px; padding: 0 14px; border-radius: 12px; border: none; background: #d9ecdf; color: #15502f; font-family: inherit; font-size: 13px; font-weight: 700;">Все виды</button>
+      <button type="button" style="height: 36px; padding: 0 14px; border-radius: 12px; border: none; background: #fff; color: #18201a; font-family: inherit; font-size: 13px; font-weight: 500;">Шэн пуэр</button>
+      <button type="button" style="height: 36px; padding: 0 14px; border-radius: 12px; border: none; background: #fff; color: #18201a; font-family: inherit; font-size: 13px; font-weight: 500;">Шу пуэр</button>
+      <button type="button" style="height: 36px; padding: 0 14px; border-radius: 12px; border: none; background: #fff; color: #18201a; font-family: inherit; font-size: 13px; font-weight: 500;">Габа улун</button>
+    </div>
+  </section>
+
+  <div style="padding: 10px 12px 0; display: flex; flex-direction: column; gap: 10px;">
+
+    <article style="display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 14px; padding: 10px; border-radius: 22px; background: #fff; box-shadow: 0 0 0 2px #1f6b43, 0 10px 24px rgba(31,107,67,.15);">
+      <div style="position: relative;">
+        <img src="../../photos/tg-25283-0.jpg" alt="Лот 329" style="width: 112px; height: 158px; object-fit: cover; border-radius: 16px; display: block;">
+        <span style="position: absolute; left: 8px; top: 8px; padding: 4px 9px; border-radius: 999px; background: #fff; color: #18201a; font-family: 'Unbounded', sans-serif; font-size: 11px; font-weight: 600;">329</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px; min-width: 0; padding: 4px 4px 2px 0;">
+        <span style="font-size: 12px; color: #1f6b43; font-weight: 600;">Шэн пуэр · блин 357 г</span>
+        <h2 style="margin: 0; font-family: 'Unbounded', sans-serif; font-size: 15px; line-height: 1.25; font-weight: 600;">Шэн Булан 2018 г.</h2>
+        <p style="margin: 0; font-size: 13px; line-height: 1.4; color: #4e5850;">Горячие ириски! Насыщенные. Очень благородно сластит!</p>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-top: auto;">
+          <span style="font-family: 'Unbounded', sans-serif; font-size: 16px; font-weight: 700;">1 595 ₽</span>
+          <div style="display: flex; align-items: center; background: #1f6b43; border-radius: 12px; color: #fff;">
+            <button type="button" aria-label="Меньше" style="width: 34px; height: 38px; border: none; background: transparent; color: #fff; font-size: 18px;">−</button>
+            <span style="min-width: 14px; text-align: center; font-weight: 700;">1</span>
+            <button type="button" aria-label="Больше" style="width: 34px; height: 38px; border: none; background: transparent; color: #fff; font-size: 18px;">+</button>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article style="display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 14px; padding: 10px; border-radius: 22px; background: #fff; box-shadow: 0 1px 2px rgba(24,32,26,.06);">
+      <div style="position: relative;">
+        <img src="../../photos/tg-25280-0.jpg" alt="Лот 326" style="width: 112px; height: 158px; object-fit: cover; border-radius: 16px; display: block;">
+        <span style="position: absolute; left: 8px; top: 8px; padding: 4px 9px; border-radius: 999px; background: #fff; color: #18201a; font-family: 'Unbounded', sans-serif; font-size: 11px; font-weight: 600;">326</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px; min-width: 0; padding: 4px 4px 2px 0;">
+        <span style="font-size: 12px; color: #1f6b43; font-weight: 600;">Шу пуэр · блин 357 г</span>
+        <h2 style="margin: 0; font-family: 'Unbounded', sans-serif; font-size: 15px; line-height: 1.25; font-weight: 600;">Шу Бань Чжан Гун Тин 2018 г.</h2>
+        <p style="margin: 0; font-size: 13px; line-height: 1.4; color: #4e5850;">Печенье, орехи. Шершаво ирисковое, нежное, плотное.</p>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-top: auto;">
+          <span style="font-family: 'Unbounded', sans-serif; font-size: 16px; font-weight: 700;">1 595 ₽</span>
+          <button type="button" aria-label="Добавить в заказ" style="width: 44px; height: 38px; border: none; border-radius: 12px; background: #e6efe8; color: #1f6b43; display: flex; align-items: center; justify-content: center;">
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
+          </button>
+        </div>
+      </div>
+    </article>
+
+    <article style="display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 14px; padding: 10px; border-radius: 22px; background: #fff; box-shadow: 0 1px 2px rgba(24,32,26,.06);">
+      <div style="position: relative;">
+        <img src="../../photos/tg-25292-0.jpg" alt="Лот 338" style="width: 112px; height: 158px; object-fit: cover; border-radius: 16px; display: block;">
+        <span style="position: absolute; left: 8px; top: 8px; padding: 4px 9px; border-radius: 999px; background: #fff; color: #18201a; font-family: 'Unbounded', sans-serif; font-size: 11px; font-weight: 600;">338</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px; min-width: 0; padding: 4px 4px 2px 0;">
+        <span style="font-size: 12px; color: #1f6b43; font-weight: 600;">Посуда · чабань</span>
+        <h2 style="margin: 0; font-family: 'Unbounded', sans-serif; font-size: 15px; line-height: 1.25; font-weight: 600;">Чабань, 59×37 см</h2>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-top: auto;">
+          <span style="font-family: 'Unbounded', sans-serif; font-size: 16px; font-weight: 700;">4 495 ₽</span>
+          <button type="button" aria-label="Добавить в заказ" style="width: 44px; height: 38px; border: none; border-radius: 12px; background: #e6efe8; color: #1f6b43; display: flex; align-items: center; justify-content: center;">
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
+          </button>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <div style="position: sticky; margin: 28px 12px 0; bottom: 14px; height: 64px; border-radius: 22px; background: #18201a; color: #fff; display: flex; align-items: center; gap: 12px; padding: 0 8px 0 10px; box-shadow: 0 14px 30px rgba(24,32,26,.3);">
+    <span style="width: 46px; height: 46px; border-radius: 16px; background: #f2c14e; color: #1b1606; display: flex; align-items: center; justify-content: center; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 16px;">1</span>
+    <div style="display: flex; flex-direction: column; gap: 2px; flex: 1;">
+      <span style="font-size: 12px; color: #aab3ac;">в заказе</span>
+      <span style="font-family: 'Unbounded', sans-serif; font-size: 18px; font-weight: 700; line-height: 1;">1 595 ₽</span>
+    </div>
+    <button type="button" style="height: 48px; padding: 0 20px; border: none; border-radius: 16px; background: #1f6b43; color: #fff; font-family: inherit; font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px;">Корзина
+      <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+    </button>
+  </div>
+</div></div>
+<script>
+document.querySelectorAll('.tabs button').forEach(function(b){b.onclick=function(){
+document.querySelectorAll('.tabs button').forEach(function(x){x.classList.toggle('on',x===b)});
+document.querySelectorAll('.v').forEach(function(v,i){v.hidden=String(i)!==b.dataset.i});scrollTo(0,0);}});
+</script></body></html>
